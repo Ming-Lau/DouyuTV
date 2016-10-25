@@ -22,6 +22,8 @@
 		4773640F1DBE095F005398E6 /* UIBarButtonItem-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773640E1DBE095F005398E6 /* UIBarButtonItem-Extension.swift */; };
 		477364111DBE18F7005398E6 /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477364101DBE18F7005398E6 /* PageTitleView.swift */; };
 		477364131DBE1AFD005398E6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477364121DBE1AFD005398E6 /* Common.swift */; };
+		4797EC751DBEFC4700D85AFD /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797EC741DBEFC4700D85AFD /* PageContentView.swift */; };
+		47FD89961DBF46CF00CC2BCE /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FD89951DBF46CF00CC2BCE /* UIColor-Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		4773640E1DBE095F005398E6 /* UIBarButtonItem-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem-Extension.swift"; sourceTree = "<group>"; };
 		477364101DBE18F7005398E6 /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		477364121DBE1AFD005398E6 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		4797EC741DBEFC4700D85AFD /* PageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
+		47FD89951DBF46CF00CC2BCE /* UIColor-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				477364101DBE18F7005398E6 /* PageTitleView.swift */,
+				4797EC741DBEFC4700D85AFD /* PageContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				4773640E1DBE095F005398E6 /* UIBarButtonItem-Extension.swift */,
+				47FD89951DBF46CF00CC2BCE /* UIColor-Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -400,8 +406,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4773640F1DBE095F005398E6 /* UIBarButtonItem-Extension.swift in Sources */,
+				47FD89961DBF46CF00CC2BCE /* UIColor-Extension.swift in Sources */,
 				477363BF1DBDDE68005398E6 /* AppDelegate.swift in Sources */,
 				477364111DBE18F7005398E6 /* PageTitleView.swift in Sources */,
+				4797EC751DBEFC4700D85AFD /* PageContentView.swift in Sources */,
 				4773640A1DBE02FE005398E6 /* MainViewController.swift in Sources */,
 				477364131DBE1AFD005398E6 /* Common.swift in Sources */,
 				4773640C1DBE049C005398E6 /* HomeViewController.swift in Sources */,
@@ -672,6 +680,7 @@
 				477363E51DBDDE68005398E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		477363E61DBDDE68005398E6 /* Build configuration list for PBXNativeTarget "DouyuTVTests" */ = {
 			isa = XCConfigurationList;
@@ -680,6 +689,7 @@
 				477363E81DBDDE68005398E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		477363E91DBDDE68005398E6 /* Build configuration list for PBXNativeTarget "DouyuTVUITests" */ = {
 			isa = XCConfigurationList;
@@ -688,6 +698,7 @@
 				477363EB1DBDDE68005398E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

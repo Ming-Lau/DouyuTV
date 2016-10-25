@@ -10,20 +10,38 @@ import UIKit
 private let kPageTitleH : CGFloat = 40
 class HomeViewController: UIViewController {
     //MARK: - 懒加载pageTitle
-    private lazy var pageTitleView : PageTitleView = {
+        lazy var pageTitleView : PageTitleView = {[weak self] in
         let titleFrame = CGRect(x: 0, y: kStatusH + kNavgationBarH, width: kScreenW, height: kPageTitleH)
         
         let titles = ["推荐","游戏","娱乐","趣玩"]
        let titleView = PageTitleView.init(frame: titleFrame, titles: titles)
+        titleView.delegate = self
         return titleView
     }()
+    lazy var pageContentView :PageContentView = {[weak self] in
+        //Frame
+        let contentH = kScreenH - kStatusH - kNavgationBarH - kPageTitleH
+        let contentFrame = CGRect(x: 0, y: kStatusH+kNavgationBarH+kPageTitleH, width:kScreenW , height:contentH)
+        //childVCs
+        var childVCs = [UIViewController]()
+        for _ in 0..<4{
+            let vc = UIViewController()
+            childVCs.append(vc)
+        }
+        let contentView = PageContentView(frame: contentFrame, childVCs: childVCs, persentVC: self)
+        contentView.delegate = self
+        return contentView
+    }()
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         view.addSubview(pageTitleView)
+        view.addSubview(pageContentView)
     }
 
 }
+//MARK: - UI
 extension HomeViewController{
      func setUpUI(){
         //不需要调整内边距
@@ -43,5 +61,17 @@ extension HomeViewController{
         let serchBtn = UIBarButtonItem(imageName: "btn_search", highImageName: "btn_search_clicked", size: size)
         let qrcodeBtn = UIBarButtonItem(imageName: "Image_scan", highImageName: "Image_scan_click", size: size)
         navigationItem.rightBarButtonItems = [historyBtn,serchBtn,qrcodeBtn]
+    }
+}
+//MARK: - PageTitleViewDelegate
+extension HomeViewController : PageTitleViewDelegate{
+    func pageTitleView(titleView: PageTitleView, selectedIndex: Int) {
+        pageContentView.setScrollCollectionView(currentIndex: selectedIndex)
+    }
+}
+//MARK: - PageContentViewDelegate
+extension HomeViewController : PageContentViewDelegate{
+    func pageContentView(pageContentView: PageContentView, progress: CGFloat, sourceInde: Int, targetIndex: Int) {
+        pageTitleView.setTiele(progress: progress, sourceIndex: sourceInde, targetIndex: targetIndex)
     }
 }
