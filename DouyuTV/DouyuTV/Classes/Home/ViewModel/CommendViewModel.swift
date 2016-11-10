@@ -10,11 +10,13 @@ import UIKit
 
 class CommendViewModel{
     lazy var anchorGroup :[AnchorGroup] = [AnchorGroup]()
+    lazy var hotGroup : AnchorGroup = AnchorGroup()
+    lazy var prettyGroup:AnchorGroup = AnchorGroup()
     
 }
 //MARK: - 请求
 extension CommendViewModel{
-    func requestData()  {
+    func requestData( _ finishedCallBack : @escaping ()->())  {
         let parameters = ["limit":"4","offset":"0","time":NSDate.getCurrentTime()]
         let dgroup = DispatchGroup()
         
@@ -23,12 +25,12 @@ extension CommendViewModel{
         NetWorkTools.requestData(type: .GET, URLString: "http://capi.douyucdn.cn/api/v1/getbigDataRoom", parameters: ["time":NSDate.getCurrentTime()]) { (result) in
             guard let resultDict = result as? [String : NSObject] else {return}
             guard let dataArray = resultDict["data"] as? [[String:NSObject]] else{return}
-            let group = AnchorGroup()
-            group.tag_name = "推荐"
-            group.icon_name = "home_header_hot"
+
+            self.hotGroup.tag_name = "推荐"
+            self.hotGroup.icon_name = "home_header_hot"
             for dict in dataArray{
                 let anchor = AnchorModel(dict: dict)
-                group.anchorArray.append(anchor)
+                self.hotGroup.anchorArray.append(anchor)
             }
             dgroup.leave()
         }
@@ -38,12 +40,11 @@ extension CommendViewModel{
         NetWorkTools.requestData(type: .GET, URLString: "http://capi.douyucdn.cn/api/v1/getVerticalRoom",parameters: parameters) { (result) in
             guard let resultDict = result as? [String : NSObject] else {return}
             guard let dataArray = resultDict["data"] as? [[String:NSObject]] else{return}
-            let group = AnchorGroup()
-            group.tag_name = "颜值"
-            group.icon_name = "home_header_phone"
+            self.prettyGroup.tag_name = "颜值"
+            self.prettyGroup.icon_name = "home_header_phone"
             for dict in dataArray{
                 let anchor = AnchorModel(dict: dict)
-                group.anchorArray.append(anchor)
+                self.prettyGroup.anchorArray.append(anchor)
             }
             dgroup.leave()
         }
@@ -59,6 +60,10 @@ extension CommendViewModel{
             }
             dgroup.leave()
         }
-        
+        dgroup.notify(queue: DispatchQueue.main) { 
+            self.anchorGroup.insert(self.prettyGroup, at: 0)
+            self.anchorGroup.insert(self.hotGroup, at: 0)
+            finishedCallBack()
+        }
     }
 }

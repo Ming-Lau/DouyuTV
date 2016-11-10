@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeCycleView" customModule="DouyuTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="140"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="R1W-cZ-iH7">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="huS-eJ-F2m">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="bd9-h3-58b"/>
+                    </connections>
+                </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="u9S-rp-dKe">
+                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="1" green="0.62596178404938463" blue="0.18341347889868331" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="R1W-cZ-iH7" secondAttribute="trailing" id="0PN-If-kIe"/>
+                <constraint firstItem="R1W-cZ-iH7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="31e-zi-Gxm"/>
+                <constraint firstItem="R1W-cZ-iH7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8JF-DI-EHm"/>
+                <constraint firstAttribute="trailing" secondItem="u9S-rp-dKe" secondAttribute="trailing" constant="10" id="PCW-sR-kYn"/>
+                <constraint firstAttribute="bottom" secondItem="u9S-rp-dKe" secondAttribute="bottom" id="VDl-LL-kWY"/>
+                <constraint firstAttribute="bottom" secondItem="R1W-cZ-iH7" secondAttribute="bottom" id="mko-A2-U06"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="R1W-cZ-iH7" id="JyF-Qe-jdP"/>
+                <outlet property="pageControl" destination="u9S-rp-dKe" id="HCs-Ml-9tr"/>
+            </connections>
+            <point key="canvasLocation" x="-104" y="42"/>
+        </view>
+    </objects>
+</document>

@@ -15,10 +15,15 @@ private let kHeaderViewH :CGFloat = 50
 private let kNormalCell  = "kNormalCell"
 private let kPerttyCell  = "kPerttyCell"
 private let kHeader  = "kNHeader"
+private let kCycleViewH = kScreenW * 3 / 8
 class CommendViewController: UIViewController {
     //MARK: - viewModel
     lazy var commendViewModel : CommendViewModel = CommendViewModel()
-    
+    fileprivate lazy var cycleView : HomeCycleView = {
+        let cycleView = HomeCycleView.homeCycleView()
+        cycleView.frame  = CGRect(x: 0, y: -kCycleViewH, width: kScreenW, height: kCycleViewH)
+        return cycleView
+    }()
     //MARK: - 懒加载
     lazy var collectionView : UICollectionView = {[unowned self] in
        let layout = UICollectionViewFlowLayout()
@@ -54,7 +59,9 @@ class CommendViewController: UIViewController {
 //MARK: - 网络请求
 extension CommendViewController{
     func loadData() {
-        commendViewModel.requestData()
+        commendViewModel.requestData {
+            self.collectionView.reloadData()
+        }
     }
 }
 //MARK: - 布局
@@ -62,30 +69,41 @@ extension CommendViewController{
     func setupUI() {
         //添加collection
         view.addSubview(collectionView)
+        collectionView.addSubview(cycleView)
+        collectionView.contentInset = UIEdgeInsetsMake(kCycleViewH, 0, 0, 0)
     }
 }
 extension CommendViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 12
+        return commendViewModel.anchorGroup.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 8
-        }
-        return 4
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : UICollectionViewCell!
-        if indexPath.section == 1 {
-           cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPerttyCell, for: indexPath)
-        }else{
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCell, for: indexPath)
-        }
+        let group = commendViewModel.anchorGroup[section]
         
-        return cell
+        return group.anchorArray.count
     }
+    //内容
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let group = commendViewModel.anchorGroup[indexPath.section]
+        let anchor = group.anchorArray[indexPath.item]
+        var cell = CollectionBaseCell()
+        
+        
+        if indexPath.section == 1 {
+           cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPerttyCell, for: indexPath) as! CollectionPrettyCell
+
+        }else{
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCell, for: indexPath) as! CollectionNormalCell
+
+        }
+        cell.anchor = anchor
+        return cell
+        
+    }
+    //头
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let herderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeader, for: indexPath)
+        let herderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeader, for: indexPath) as! CollectionHeaderView
+        herderView.group = commendViewModel.anchorGroup[indexPath.section]
         return herderView
         
     }

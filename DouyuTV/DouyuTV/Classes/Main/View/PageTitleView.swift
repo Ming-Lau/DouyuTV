@@ -101,6 +101,8 @@ extension PageTitleView{
     @objc func lableTap(tap : UITapGestureRecognizer){
         //拿到点击的lable
         guard let lable = tap.view as? UILabel else {return}
+        //如果点击的是同一个lable直接返回
+        if lable.tag == currentIndex {return}
         //拿到之前被选中的
         let oldLable = titleLables[currentIndex]
         //改颜色
